@@ -21,7 +21,7 @@ jobs:
       - name: Set up Java version
         uses: actions/setup-java@v1
         with:
-          java-version: '8'
+          java-version: '17'
 
       - name: Build with Maven
         run: mvn clean install
@@ -51,5 +51,6 @@ jobs:
         with:
           app-name: 'StockSage'
           slot-name: 'production'
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_ac025c9e05be40c38c72bb1e04975f64 }}
+          publish-profile: ${{ secrets.AzureAppService_PublishProfile_13180fa13e584f8a87a589598edd2e3b }}
+          package: '*.jar'
           package: '*.jar'
