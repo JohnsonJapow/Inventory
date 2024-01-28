@@ -1,56 +1,53 @@
-# Inventory
+# Stock Sage - An Inventory Management System
 
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
+## Usage 
+- The web application allows users to manage their inventory.
 
-name: Build and deploy JAR app to Azure Web App - StockSage
+## Features
+- Adding/Updating stocks
+- Browsing items with line chart format (quantity with sold date/purchasing date/wasted date)
+- Checking items in the selected location
 
-on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
+## Tech Stack
+- Java Spring framework / Spring Boot
+- Vue.js for website UI
+- Chart.js for displaying chart lines (integrated into Vue.js components)
+- PostgreSQL for storing data (User information and Inventory information)
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+## Setup
 
-    steps:
-      - uses: actions/checkout@v2
+### Database
+1. Set the database username and password as system properties:
+   
+   - **For Linux or macOS:**
+     ```bash
+     export DB_USERNAME=your_username
+     export DB_PASSWORD=your_password
+     ```
+   - **For Windows:**
+     ```batch
+     set DB_USERNAME=your_username
+     set DB_PASSWORD=your_password
+     ```
 
-      - name: Set up Java version
-        uses: actions/setup-java@v1
-        with:
-          java-version: '17'
-
-      - name: Build with Maven
-        run: mvn clean install
-
-      - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v2
-        with:
-          name: java-app
-          path: '${{ github.workspace }}/target/*.jar'
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    environment:
-      name: 'production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    
-    steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v2
-        with:
-          name: java-app
-
-      - name: Deploy to Azure Web App
-        id: deploy-to-webapp
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: 'StockSage'
-          slot-name: 'production'
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_13180fa13e584f8a87a589598edd2e3b }}
-          package: '*.jar'
-          package: '*.jar'
+### Server
+1. Clone the repository to your local machine:
+   ```bash
+   git clone https://github.com/JohnsonJapow/Inventory.git
+2. Move to the inventory directory:
+   ```bash
+   cd .\inventory
+3. Run the server:
+   ```bash
+   .\mvnw spring-boot:run
+### Client
+1. Move to the frontend directory:
+   ```bash
+   cd .\inventory\frontend
+2. Run the client:
+   ```bash
+   npm run serve
+## Notes
+- By default, the client runs on localhost:8080
+- By default, the server runs on localhost:4321
+- By default, the database runs on localhost:5432
